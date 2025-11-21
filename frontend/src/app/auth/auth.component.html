@@ -1,0 +1,16 @@
+<div class="p-6 overflow-hidden border-2 border-amber-400 bg-gray-100">
+  <div *ngIf="isLogin; else registerForm">
+    <app-login></app-login>
+    <p class="text-center mt-4">
+      Não tem uma conta?
+      <button (click)="toggleForm()" class="text-primary hover:underline">Cadastre-se</button>
+    </p>
+  </div>
+  <ng-template #registerForm>
+    <app-register></app-register>
+    <p class="text-center mt-4">
+      Já tem uma conta?
+      <button (click)="toggleForm()" class="text-primary hover:underline">Faça login</button>
+    </p>
+  </ng-template>
+</div>

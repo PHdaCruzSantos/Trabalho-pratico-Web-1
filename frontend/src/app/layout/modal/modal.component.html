@@ -1,0 +1,16 @@
+<div
+  *ngIf="isOpen$()"
+  @fade
+  class="fixed inset-0 bg-gray-500 bg-opacity-80 z-40 flex items-center justify-center overflow-hidden"
+  (click)="closeModal()"
+  (keydown.escape)="closeModal()"
+>
+  <div
+    class="bg-surface dark:bg-surface-dark rounded-lg shadow-xl z-50 w-full max-w-md overflow-hidden"
+    @slide
+    (click)="$event.stopPropagation()"
+    (keydown.escape)="closeModal()"
+  >
+    <ng-template [cdkPortalOutlet]="componentPortal()"></ng-template>
+  </div>
+</div>

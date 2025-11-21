@@ -1,0 +1,11 @@
+./GiaDev.md
+GiaDev.md
+
+backend/.env
+backend/node_modules
+
+frontend/.env
+frontend/node_modules
+
+
+node_modules

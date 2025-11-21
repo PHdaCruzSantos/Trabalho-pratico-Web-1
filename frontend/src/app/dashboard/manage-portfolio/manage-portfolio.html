@@ -1,0 +1,65 @@
+<div *ngIf="worker" class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4 text-on-background dark:text-on-background-dark">Gerenciar Portfólio</h1>
+
+  <div class="bg-surface dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-xl font-bold mb-4 text-on-surface dark:text-on-surface-dark">Adicionar Novo Item</h2>
+    <form (ngSubmit)="addPortfolioItem()">
+      <div class="mb-4">
+        <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="title">
+          Título
+        </label>
+        <input [(ngModel)]="newPortfolioItem.title" name="title" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="Título do trabalho">
+      </div>
+      <div class="mb-4">
+        <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="description">
+          Descrição
+        </label>
+        <textarea [(ngModel)]="newPortfolioItem.description" name="description" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="description" placeholder="Descrição do trabalho"></textarea>
+      </div>
+      <div class="mb-4">
+        <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="imageUrl">
+          URL da Imagem
+        </label>
+        <input [(ngModel)]="newPortfolioItem.imageUrl" name="imageUrl" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="imageUrl" type="text" placeholder="https://example.com/imagem.png">
+      </div>
+      <button [disabled]="loading" class="bg-primary hover:bg-primary-dark text-on-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="loading" type="submit" data-tooltip-target="Adicionar item ao portfólio">
+        <ng-container *ngIf="loading; else notLoadingAdd">
+          <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Adicionando...
+        </ng-container>
+        <ng-template #notLoadingAdd>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M12 5.25a.75.75 0 0 1 .75.75v5.25H18a.75.75 0 0 1 0 1.5h-5.25V18a.75.75 0 0 1-1.5 0v-5.25H6a.75.75 0 0 1 0-1.5h5.25V6a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+          </svg>
+          Adicionar
+        </ng-template>
+      </button>
+    </form>
+  </div>
+
+  <div class="bg-surface dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-xl font-bold mb-4 text-on-surface dark:text-on-surface-dark">Itens do Portfólio</h2>
+    <div *ngFor="let item of worker.portfolio" class="flex items-center justify-between border-b py-2 border-gray-200 dark:border-gray-700">
+      <div class="text-on-surface dark:text-on-surface-dark">
+        <h3 class="font-bold">{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+      <button (click)="removePortfolioItem(item.id)" [disabled]="removing[item.id]" class="bg-secondary hover:bg-secondary-dark text-on-secondary font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline w-24 flex justify-center" [class.opacity-50]="removing[item.id]" type="button" data-tooltip-target="Remover item do portfólio">
+        <ng-container *ngIf="removing[item.id]; else notRemoving">
+          <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </ng-container>
+        <ng-template #notRemoving>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+          </svg>
+        </ng-template>
+      </button>
+    </div>
+  </div>
+</div>

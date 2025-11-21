@@ -1,0 +1,76 @@
+<form (ngSubmit)="login()" class="bg-surface dark:bg-surface-dark rounded px-8 pt-6 pb-8">
+  <h1 class="text-2xl font-bold text-center mb-4 text-on-surface dark:text-on-surface-dark">
+    Login
+  </h1>
+  <div class="mb-4">
+    <label
+      class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2"
+      for="email"
+    >
+      Email
+    </label>
+    <input
+      [(ngModel)]="email"
+      name="email"
+      class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline"
+      id="email"
+      type="email"
+      placeholder="Email"
+      autocomplete="email"
+    />
+  </div>
+  <div class="mb-6">
+    <label
+      class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2"
+      for="password"
+    >
+      Senha
+    </label>
+    <input
+      [(ngModel)]="password"
+      name="password"
+      class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      id="password"
+      type="password"
+      placeholder="******************"
+      autocomplete="current-password"
+    />
+  </div>
+  <div class="flex items-center justify-center">
+    <button
+      [disabled]="loading"
+      class="bg-primary hover:border-blue-800 text-on-primary border-2 border-s-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2"
+      [class.opacity-50]="loading"
+      type="submit"
+    >
+      <ng-container *ngIf="loading; else notLoading">
+        <svg
+          class="animate-spin -ml-1 mr-2 h-5 w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Entrando...
+      </ng-container>
+                  <ng-template #notLoading>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                      <path fill-rule="evenodd" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" clip-rule="evenodd" />
+                    </svg>
+                    Entrar
+                  </ng-template>    </button>
+  </div>
+</form>

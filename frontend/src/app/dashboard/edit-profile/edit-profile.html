@@ -1,0 +1,52 @@
+<div *ngIf="worker" class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4 text-on-background dark:text-on-background-dark">Editar Perfil</h1>
+
+  <form (ngSubmit)="save()" class="bg-surface dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="name">
+        Nome
+      </label>
+      <input [(ngModel)]="worker.user.name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Nome">
+    </div>
+    <div class="mb-4">
+      <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="bio">
+        Bio
+      </label>
+      <textarea [(ngModel)]="worker.bio" name="bio" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="bio" placeholder="Fale sobre você"></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="location">
+        Localização
+      </label>
+      <input [(ngModel)]="worker.location" name="location" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Sua cidade">
+    </div>
+
+    <div class="mb-4 text-on-surface dark:text-on-surface-dark">
+      <label class="block text-sm font-bold mb-2">
+        Categorias
+      </label>
+      <div *ngFor="let category of allCategories" class="flex items-center">
+        <input type="checkbox" [name]="category.id" [id]="category.id" [checked]="selectedCategories[category.id]" (change)="onCategoryChange(category.id, $any($event.target).checked)" class="mr-2">
+        <label [for]="category.id">{{ category.name }}</label>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <button [disabled]="loading" class="bg-primary hover:bg-primary-dark text-on-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="loading" type="submit" data-tooltip-target="Salvar alterações no perfil">
+        <ng-container *ngIf="loading; else notLoading">
+          <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Salvando...
+        </ng-container>
+        <ng-template #notLoading>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+          </svg>
+          Salvar
+        </ng-template>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,70 @@
+<div *ngIf="worker" class="container mx-auto p-4">
+  <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-md p-6">
+    <h1 class="text-3xl font-bold text-on-surface dark:text-on-surface-dark">{{ worker.user.name }}</h1>
+    <p class="text-on-surface dark:text-on-surface-dark mt-2">{{ worker.bio }}</p>
+
+    <div class="mt-4">
+      <h2 class="text-xl font-bold text-on-surface dark:text-on-surface-dark">Categorias</h2>
+      <div class="mt-2">
+        <span *ngFor="let category of worker.categories" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium mr-2 px-2.5 py-0.5 rounded transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">{{ category.name }}</span>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <h2 class="text-xl font-bold text-on-surface dark:text-on-surface-dark">Portfólio</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+        <div *ngFor="let item of worker.portfolio" class="bg-background dark:bg-background-dark rounded-lg p-4 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
+          <img [src]="item.imageUrl" [alt]="item.title" class="w-full h-48 object-cover rounded-lg">
+          <h3 class="text-lg font-bold mt-2 text-on-background dark:text-on-background-dark">{{ item.title }}</h3>
+          <p class="text-on-background dark:text-on-background-dark">{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <h2 class="text-xl font-bold text-on-surface dark:text-on-surface-dark">Avaliações</h2>
+      <div *ngFor="let review of worker.reviews" class="bg-background dark:bg-background-dark rounded-lg p-4 mt-2 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
+        <div class="flex items-center">
+          <div class="font-bold text-on-background dark:text-on-background-dark">{{ review.author.name }}</div>
+          <div class="ml-2 text-yellow-500">{{ '★'.repeat(review.rating) }}</div>
+        </div>
+        <p class="text-on-background dark:text-on-background-dark mt-1">{{ review.comment }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="canReview" class="mt-6">
+      <h2 class="text-xl font-bold text-on-surface dark:text-on-surface-dark">Deixe uma Avaliação</h2>
+      <form (ngSubmit)="submitReview()" class="bg-background dark:bg-background-dark rounded-lg p-4 mt-2">
+        <div class="mb-4">
+          <label class="block text-on-background dark:text-on-background-dark text-sm font-bold mb-2" for="rating">Nota</label>
+          <select [(ngModel)]="newReview.rating" name="rating" id="rating" class="shadow appearance-none border rounded w-full py-2 px-3 bg-surface dark:bg-surface-dark text-on-surface dark:text-on-surface-dark leading-tight focus:outline-none focus:shadow-outline">
+            <option [value]="5">5 Estrelas</option>
+            <option [value]="4">4 Estrelas</option>
+            <option [value]="3">3 Estrelas</option>
+            <option [value]="2">2 Estrelas</option>
+            <option [value]="1">1 Estrela</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="block text-on-background dark:text-on-background-dark text-sm font-bold mb-2" for="comment">Comentário</label>
+          <textarea [(ngModel)]="newReview.comment" name="comment" id="comment" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 bg-surface dark:bg-surface-dark text-on-surface dark:text-on-surface-dark leading-tight focus:outline-none focus:shadow-outline" placeholder="Deixe seu comentário"></textarea>
+        </div>
+        <button [disabled]="submittingReview" class="bg-primary hover:bg-primary-dark text-on-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="submittingReview" type="submit" data-tooltip-target="Enviar sua avaliação">
+          <ng-container *ngIf="submittingReview; else notSubmitting">
+            <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Enviando...
+          </ng-container>
+          <ng-template #notSubmitting>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+            </svg>
+            Enviar Avaliação
+          </ng-template>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
