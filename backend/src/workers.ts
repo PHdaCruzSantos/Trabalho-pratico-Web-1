@@ -5,10 +5,38 @@ const prisma = new PrismaClient();
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const { category, name, location } = req.query;
+  const { category, name, location, search } = req.query;
 
   const where: any = {};
 
+  if (search) {
+    const searchTerm = search as string;
+    where.OR = [
+      {
+        user: {
+          name: {
+            contains: searchTerm,
+          },
+        },
+      },
+      {
+        categories: {
+          some: {
+            name: {
+              contains: searchTerm,
+            },
+          },
+        },
+      },
+      {
+        location: {
+          contains: searchTerm,
+        },
+      },
+    ];
+  }
+
+  // Apply specific filters AND logic if provided
   if (category) {
     where.categories = {
       some: {

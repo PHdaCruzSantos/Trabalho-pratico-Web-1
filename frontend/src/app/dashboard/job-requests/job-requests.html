@@ -1,0 +1,48 @@
+<h1 class="text-2xl font-bold text-on-surface-light dark:text-on-surface-dark mb-6">{{ 'DASHBOARD.REQUESTS.TITLE' | translate }}</h1>
+
+<div *ngIf="jobRequests.length > 0; else noRequests" class="space-y-4">
+  <div *ngFor="let request of jobRequests" class="bg-surface-light dark:bg-surface-dark rounded-lg shadow-md p-6 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
+    <div class="flex justify-between items-start">
+      <div>
+        <h2 class="text-xl font-bold text-on-surface-light dark:text-on-surface-dark">{{ request.title }}</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">{{ 'DASHBOARD.REQUESTS.SENT_BY' | translate }} {{ request.clientName }}</p>
+      </div>
+      <span
+        [ngClass]="{
+          'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300': request.status === 'pending',
+          'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300': request.status === 'accepted',
+          'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300': request.status === 'rejected'
+        }"
+        class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
+      >
+        {{ request.status | titlecase }}
+      </span>
+    </div>
+
+    <p class="mt-4 text-on-surface-light dark:text-on-surface-dark">{{ request.description }}</p>
+
+    <div *ngIf="request.status === 'pending'" class="mt-6 flex justify-end space-x-4">
+      <button (click)="rejectRequest(request)" class="btn-secondary">
+        {{ 'DASHBOARD.REQUESTS.REJECT' | translate }}
+      </button>
+      <button (click)="acceptRequest(request)" class="btn-primary">
+        {{ 'DASHBOARD.REQUESTS.ACCEPT' | translate }}
+      </button>
+    </div>
+
+    <div *ngIf="request.status !== 'pending'" class="mt-6 text-right">
+      <p *ngIf="request.status === 'accepted'" class="font-semibold text-green-600 dark:text-green-400">{{ 'DASHBOARD.REQUESTS.ACCEPTED' | translate }}</p>
+      <p *ngIf="request.status === 'rejected'" class="font-semibold text-red-600 dark:text-red-400">{{ 'DASHBOARD.REQUESTS.REJECTED' | translate }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noRequests>
+  <div class="text-center py-12">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+    </svg>
+    <h3 class="mt-2 text-sm font-medium text-on-surface-light dark:text-on-surface-dark">{{ 'DASHBOARD.REQUESTS.NO_REQUESTS' | translate }}</h3>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ 'DASHBOARD.REQUESTS.NO_REQUESTS_DESC' | translate }}</p>
+  </div>
+</ng-template>

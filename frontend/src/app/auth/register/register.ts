@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { Role } from '../../models/user.model';
@@ -6,15 +6,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
 import { ModalService } from '../../services/modal.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.html',
   styleUrls: ['./register.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, TranslateModule],
 })
 export class RegisterComponent {
+  @Output() switchMode = new EventEmitter<void>();
   name = '';
   email = '';
   password = '';
@@ -38,8 +40,8 @@ export class RegisterComponent {
       next: (user) => {
         this.loading = false;
         this.notificationService.showSuccess(
-          'Cadastro realizado com sucesso!',
-          'Cadastro Concluído'
+          'NOTIFICATION.REGISTER_SUCCESS',
+          'NOTIFICATION.REGISTER_TITLE'
         );
         this.modalService.close();
         if (user.role === Role.TRABALHADOR) {
@@ -51,10 +53,14 @@ export class RegisterComponent {
       error: (err) => {
         this.loading = false;
         this.notificationService.showError(
-          err.error?.message || 'Não foi possível realizar o cadastro. Verifique seus dados.',
-          'Erro de Cadastro'
+          err.error?.message || 'NOTIFICATION.REGISTER_ERROR',
+          'NOTIFICATION.REGISTER_ERROR_TITLE'
         );
       },
     });
+  }
+
+  switchToLogin(): void {
+    this.switchMode.emit();
   }
 }

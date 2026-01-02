@@ -9,13 +9,14 @@ import { WorkerProfile } from '../models/worker-profile.model';
 import { WorkerService } from '../services/worker';
 import { ModalService } from '../services/modal.service';
 import { AuthComponent } from '../auth/auth.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
 })
 export class HomeComponent implements OnInit {
   categories: ServiceCategory[] = [];

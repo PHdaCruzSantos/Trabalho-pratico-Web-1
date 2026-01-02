@@ -1,50 +1,64 @@
 <div *ngIf="worker" class="container mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4 text-on-background dark:text-on-background-dark">Editar Perfil</h1>
+  <h1 class="text-2xl font-bold mb-4 text-on-background-light dark:text-on-background-dark">{{ 'DASHBOARD.EDIT_PROFILE.TITLE' | translate }}</h1>
 
-  <form (ngSubmit)="save()" class="bg-surface dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <form (ngSubmit)="save()" class="bg-surface-light dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
     <div class="mb-4">
-      <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="name">
-        Nome
+      <label class="block text-on-surface-light dark:text-on-surface-dark text-sm font-bold mb-2" for="name">
+        {{ 'DASHBOARD.EDIT_PROFILE.NAME' | translate }}
       </label>
-      <input [(ngModel)]="worker.user.name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Nome">
+      <input [(ngModel)]="worker.user.name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" [placeholder]="'DASHBOARD.EDIT_PROFILE.NAME' | translate">
     </div>
     <div class="mb-4">
-      <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="bio">
-        Bio
+      <label class="block text-on-surface-light dark:text-on-surface-dark text-sm font-bold mb-2" for="bio">
+        {{ 'DASHBOARD.EDIT_PROFILE.BIO' | translate }}
       </label>
-      <textarea [(ngModel)]="worker.bio" name="bio" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="bio" placeholder="Fale sobre você"></textarea>
+      <textarea [(ngModel)]="worker.bio" name="bio" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="bio" [placeholder]="'DASHBOARD.EDIT_PROFILE.BIO_PLACEHOLDER' | translate"></textarea>
     </div>
     <div class="mb-4">
-      <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="location">
-        Localização
+      <label class="block text-on-surface-light dark:text-on-surface-dark text-sm font-bold mb-2" for="location">
+        {{ 'DASHBOARD.EDIT_PROFILE.LOCATION' | translate }}
       </label>
-      <input [(ngModel)]="worker.location" name="location" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Sua cidade">
+      <input [(ngModel)]="worker.location" name="location" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" [placeholder]="'DASHBOARD.EDIT_PROFILE.LOCATION_PLACEHOLDER' | translate">
     </div>
 
-    <div class="mb-4 text-on-surface dark:text-on-surface-dark">
-      <label class="block text-sm font-bold mb-2">
-        Categorias
+    <div class="mb-6 text-on-surface-light dark:text-on-surface-dark">
+      <label class="block text-sm font-bold mb-3">
+        {{ 'DASHBOARD.EDIT_PROFILE.CATEGORIES' | translate }}
       </label>
-      <div *ngFor="let category of allCategories" class="flex items-center">
-        <input type="checkbox" [name]="category.id" [id]="category.id" [checked]="selectedCategories[category.id]" (change)="onCategoryChange(category.id, $any($event.target).checked)" class="mr-2">
-        <label [for]="category.id">{{ category.name }}</label>
+      <div class="flex flex-wrap gap-3">
+        <label 
+          *ngFor="let category of allCategories" 
+          class="cursor-pointer relative"
+        >
+          <input 
+            type="checkbox" 
+            [name]="category.id" 
+            [id]="category.id" 
+            [checked]="selectedCategories[category.id]" 
+            (change)="onCategoryChange(category.id, $any($event.target).checked)" 
+            class="sr-only peer"
+          >
+          <div class="px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark text-on-surface-light dark:text-on-surface-dark peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800">
+            {{ category.name }}
+          </div>
+        </label>
       </div>
     </div>
 
     <div class="flex items-center justify-between">
-      <button [disabled]="loading" class="bg-primary hover:bg-primary-dark text-on-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="loading" type="submit" data-tooltip-target="Salvar alterações no perfil">
+      <button [disabled]="loading" class="bg-primary-light dark:bg-primary-dark hover:bg-primary-dark text-on-primary-light dark:text-on-primary-dark font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="loading" type="submit" [attr.data-tooltip-target]="'DASHBOARD.EDIT_PROFILE.SAVE' | translate">
         <ng-container *ngIf="loading; else notLoading">
           <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          Salvando...
+          {{ 'DASHBOARD.EDIT_PROFILE.SAVING' | translate }}
         </ng-container>
         <ng-template #notLoading>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
             <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
           </svg>
-          Salvar
+          {{ 'DASHBOARD.EDIT_PROFILE.SAVE' | translate }}
         </ng-template>
       </button>
     </div>

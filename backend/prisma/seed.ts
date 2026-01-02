@@ -101,6 +101,75 @@ async function main() {
   });
   console.log(`Created worker user: ${workerUser2.name}`);
 
+  // Create Pedreiro user
+  const workerUser3 = await prisma.user.create({
+    data: {
+      name: "Carlos Pedreiro",
+      email: "carlos.pedreiro@example.com",
+      password: await bcrypt.hash("password123", 10),
+      role: Role.TRABALHADOR,
+      workerProfile: {
+        create: {
+          bio: "Pedreiro com experiência em alvenaria, reboco e acabamentos.",
+          location: "Rio de Janeiro, RJ",
+          categories: {
+            connect: [{ name: "Pedreiro" }],
+          },
+        },
+      },
+    },
+    include: {
+      workerProfile: true,
+    },
+  });
+  console.log(`Created worker user: ${workerUser3.name}`);
+
+  // Create Pintor user
+  const workerUser4 = await prisma.user.create({
+    data: {
+      name: "Pedro Pintor",
+      email: "pedro.pintor@example.com",
+      password: await bcrypt.hash("password123", 10),
+      role: Role.TRABALHADOR,
+      workerProfile: {
+        create: {
+          bio: "Pintor residencial e comercial, especialista em texturas e efeitos decorativos.",
+          location: "Belo Horizonte, MG",
+          categories: {
+            connect: [{ name: "Pintor" }],
+          },
+        },
+      },
+    },
+    include: {
+      workerProfile: true,
+    },
+  });
+  console.log(`Created worker user: ${workerUser4.name}`);
+
+  // Create Jardineiro user
+  const workerUser5 = await prisma.user.create({
+    data: {
+      name: "Lucas Jardineiro",
+      email: "lucas.jardineiro@example.com",
+      password: await bcrypt.hash("password123", 10),
+      role: Role.TRABALHADOR,
+      workerProfile: {
+        create: {
+          bio: "Jardineiro apaixonado por plantas. Faço manutenção de jardins, poda e paisagismo.",
+          location: "Curitiba, PR",
+          categories: {
+            connect: [{ name: "Jardineiro" }],
+          },
+        },
+      },
+    },
+    include: {
+      workerProfile: true,
+    },
+  });
+  console.log(`Created worker user: ${workerUser5.name}`);
+
   // Create a review from the client to the worker
   if (workerUser.workerProfile) {
     await prisma.review.create({

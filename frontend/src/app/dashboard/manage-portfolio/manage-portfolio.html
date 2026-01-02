@@ -1,53 +1,53 @@
 <div *ngIf="worker" class="container mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4 text-on-background dark:text-on-background-dark">Gerenciar Portfólio</h1>
+  <h1 class="text-2xl font-bold mb-4 text-on-background-light dark:text-on-background-dark">{{ 'DASHBOARD.PORTFOLIO.TITLE' | translate }}</h1>
 
-  <div class="bg-surface dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h2 class="text-xl font-bold mb-4 text-on-surface dark:text-on-surface-dark">Adicionar Novo Item</h2>
+  <div class="bg-surface-light dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-xl font-bold mb-4 text-on-surface-light dark:text-on-surface-dark">{{ 'DASHBOARD.PORTFOLIO.ADD_NEW' | translate }}</h2>
     <form (ngSubmit)="addPortfolioItem()">
       <div class="mb-4">
-        <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="title">
-          Título
+        <label class="block text-on-surface-light dark:text-on-surface-dark text-sm font-bold mb-2" for="title">
+          {{ 'DASHBOARD.PORTFOLIO.ITEM_TITLE' | translate }}
         </label>
-        <input [(ngModel)]="newPortfolioItem.title" name="title" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="Título do trabalho">
+        <input [(ngModel)]="newPortfolioItem.title" name="title" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" [placeholder]="'DASHBOARD.PORTFOLIO.ITEM_TITLE_PLACEHOLDER' | translate">
       </div>
       <div class="mb-4">
-        <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="description">
-          Descrição
+        <label class="block text-on-surface-light dark:text-on-surface-dark text-sm font-bold mb-2" for="description">
+          {{ 'DASHBOARD.PORTFOLIO.ITEM_DESC' | translate }}
         </label>
-        <textarea [(ngModel)]="newPortfolioItem.description" name="description" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="description" placeholder="Descrição do trabalho"></textarea>
+        <textarea [(ngModel)]="newPortfolioItem.description" name="description" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="description" [placeholder]="'DASHBOARD.PORTFOLIO.ITEM_DESC_PLACEHOLDER' | translate"></textarea>
       </div>
       <div class="mb-4">
-        <label class="block text-on-surface dark:text-on-surface-dark text-sm font-bold mb-2" for="imageUrl">
-          URL da Imagem
+        <label class="block text-on-surface-light dark:text-on-surface-dark text-sm font-bold mb-2" for="imageUrl">
+          {{ 'DASHBOARD.PORTFOLIO.ITEM_IMAGE' | translate }}
         </label>
-        <input [(ngModel)]="newPortfolioItem.imageUrl" name="imageUrl" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="imageUrl" type="text" placeholder="https://example.com/imagem.png">
+        <input [(ngModel)]="newPortfolioItem.imageUrl" name="imageUrl" class="shadow appearance-none border rounded w-full py-2 px-3 bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark leading-tight focus:outline-none focus:shadow-outline" id="imageUrl" type="text" placeholder="https://example.com/imagem.png">
       </div>
-      <button [disabled]="loading" class="bg-primary hover:bg-primary-dark text-on-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="loading" type="submit" data-tooltip-target="Adicionar item ao portfólio">
+      <button [disabled]="loading" class="bg-primary-light dark:bg-primary-dark hover:bg-primary-dark text-on-primary-light dark:text-on-primary-dark font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" [class.opacity-50]="loading" type="submit" [attr.data-tooltip-target]="'DASHBOARD.PORTFOLIO.ADD' | translate">
         <ng-container *ngIf="loading; else notLoadingAdd">
           <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          Adicionando...
+          {{ 'DASHBOARD.PORTFOLIO.ADDING' | translate }}
         </ng-container>
         <ng-template #notLoadingAdd>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
             <path fill-rule="evenodd" d="M12 5.25a.75.75 0 0 1 .75.75v5.25H18a.75.75 0 0 1 0 1.5h-5.25V18a.75.75 0 0 1-1.5 0v-5.25H6a.75.75 0 0 1 0-1.5h5.25V6a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
           </svg>
-          Adicionar
+          {{ 'DASHBOARD.PORTFOLIO.ADD' | translate }}
         </ng-template>
       </button>
     </form>
   </div>
 
-  <div class="bg-surface dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h2 class="text-xl font-bold mb-4 text-on-surface dark:text-on-surface-dark">Itens do Portfólio</h2>
+  <div class="bg-surface-light dark:bg-surface-dark shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-xl font-bold mb-4 text-on-surface-light dark:text-on-surface-dark">{{ 'DASHBOARD.PORTFOLIO.ITEMS' | translate }}</h2>
     <div *ngFor="let item of worker.portfolio" class="flex items-center justify-between border-b py-2 border-gray-200 dark:border-gray-700">
-      <div class="text-on-surface dark:text-on-surface-dark">
+      <div class="text-on-surface-light dark:text-on-surface-dark">
         <h3 class="font-bold">{{ item.title }}</h3>
         <p>{{ item.description }}</p>
       </div>
-      <button (click)="removePortfolioItem(item.id)" [disabled]="removing[item.id]" class="bg-secondary hover:bg-secondary-dark text-on-secondary font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline w-24 flex justify-center" [class.opacity-50]="removing[item.id]" type="button" data-tooltip-target="Remover item do portfólio">
+      <button (click)="removePortfolioItem(item.id)" [disabled]="removing[item.id]" class="bg-secondary-light dark:bg-secondary-dark hover:bg-secondary-dark text-on-secondary-light dark:text-on-secondary-dark font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline w-24 flex justify-center" [class.opacity-50]="removing[item.id]" type="button" data-tooltip-target="Remover item do portfólio">
         <ng-container *ngIf="removing[item.id]; else notRemoving">
           <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

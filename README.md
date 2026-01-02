@@ -4,6 +4,8 @@
 
 ### Resumo
 
+![preview](./previewTPWeb.png)
+
 Este projeto consiste em uma plataforma web, chamada "Catálogo de Serviços", projetada para conectar clientes (Contratantes) a profissionais autônomos (Trabalhadores) para a prestação de serviços locais. A aplicação permite que trabalhadores criem perfis detalhados, incluindo uma biografia, localização e um portfólio de trabalhos anteriores. Os contratantes podem buscar por profissionais utilizando filtros de nome, categoria de serviço ou localização, visualizar seus perfis completos com portfólios e avaliações, e também deixar suas próprias avaliações após a contratação, fomentando um ecossistema de confiança e qualidade.
 
 ### 1. Tema
@@ -62,3 +64,21 @@ O frontend foi desenvolvido com Angular e o backend com Node.js/Express, e a int
 ### 5. Referências
 
 Não foram utilizadas referências externas diretas para a concepção do modelo de negócio, baseando-se em plataformas de serviço de conhecimento geral.
+
+## TODO:
+
+### Fixes
+- [ ] Arrumar perfil de user != perfil de worker
+- [ ] Arrumar hover e incicação de botoes, adicionando cursor: pointer
+- [ ] Ajustar posição dos toasts de feedback
+- [ ] Arrumar opacidade e posição do header nas telas de resultados de busca e perfil do trabalhador
+
+### Features
+- [ ] Adicionar icones e melhorar a itendificação das profissoes, adicionar mais categorias.
+- [ ] Melhorar a interface de login e cadastro, adicionar mais campos de preenchimento.
+- [ ] Adicionar mais funcionalidades ao dashboard do trabalhador, como a possibilidade de adicionar mais projetos ao portfólio.
+- [ ] Adicionar medalhas e verificação de trabalhadores.
+- [ ] Adicionar sistema de chat entre contratantes e trabalhadores.
+- [ ] Adicionar busca por localidade, proximidade entre contratante e trabalhador. Exibindo um mapa com os resultados.
+- [ ] Adicionar redes sociais e links para o perfil do trabalhador.
+

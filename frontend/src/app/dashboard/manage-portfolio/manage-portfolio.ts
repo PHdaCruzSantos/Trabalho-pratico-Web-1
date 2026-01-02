@@ -5,13 +5,14 @@ import { WorkerService } from '../../services/worker';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-manage-portfolio',
   templateUrl: './manage-portfolio.html',
   styleUrls: ['./manage-portfolio.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, TranslateModule]
 })
 export class ManagePortfolioComponent implements OnInit {
 
@@ -43,11 +44,11 @@ export class ManagePortfolioComponent implements OnInit {
         next: (item) => {
           this.worker?.portfolio.push(item);
           this.newPortfolioItem = { title: '', description: '', imageUrl: '' };
-          this.notificationService.showSuccess('Item adicionado com sucesso!');
+          this.notificationService.showSuccess('NOTIFICATION.PORTFOLIO_ADD_SUCCESS');
           this.loading = false;
         },
         error: () => {
-          this.notificationService.showError('Erro ao adicionar o item.');
+          this.notificationService.showError('NOTIFICATION.PORTFOLIO_ADD_ERROR');
           this.loading = false;
         }
       });
@@ -61,12 +62,12 @@ export class ManagePortfolioComponent implements OnInit {
         next: () => {
           if (this.worker) {
             this.worker.portfolio = this.worker.portfolio.filter(p => p.id !== id);
-            this.notificationService.showSuccess('Item removido com sucesso!');
+            this.notificationService.showSuccess('NOTIFICATION.PORTFOLIO_REMOVE_SUCCESS');
           }
           this.removing[id] = false;
         },
         error: () => {
-          this.notificationService.showError('Erro ao remover o item.');
+          this.notificationService.showError('NOTIFICATION.PORTFOLIO_REMOVE_ERROR');
           this.removing[id] = false;
         }
       });

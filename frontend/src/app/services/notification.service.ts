@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  constructor(private toastr: ToastrService) { }
+  constructor(
+    private toastr: ToastrService,
+    private translate: TranslateService
+  ) { }
 
-  showSuccess(message: string, title: string = 'Sucesso'): void {
-    this.toastr.success(message, title);
+  showSuccess(messageKey: string, titleKey: string = 'NOTIFICATION.SUCCESS', params?: any): void {
+    this.translate.get([messageKey, titleKey], params).subscribe(translations => {
+      this.toastr.success(translations[messageKey], translations[titleKey]);
+    });
   }
 
-  showError(message: string, title: string = 'Erro'): void {
-    this.toastr.error(message, title);
+  showError(messageKey: string, titleKey: string = 'NOTIFICATION.ERROR', params?: any): void {
+    this.translate.get([messageKey, titleKey], params).subscribe(translations => {
+      this.toastr.error(translations[messageKey], translations[titleKey]);
+    });
   }
 
-  showInfo(message: string, title: string = 'Informação'): void {
-    this.toastr.info(message, title);
+  showInfo(messageKey: string, titleKey: string = 'NOTIFICATION.INFO', params?: any): void {
+    this.translate.get([messageKey, titleKey], params).subscribe(translations => {
+      this.toastr.info(translations[messageKey], translations[titleKey]);
+    });
   }
 
-  showWarning(message: string, title: string = 'Atenção'): void {
-    this.toastr.warning(message, title);
+  showWarning(messageKey: string, titleKey: string = 'NOTIFICATION.WARNING', params?: any): void {
+    this.translate.get([messageKey, titleKey], params).subscribe(translations => {
+      this.toastr.warning(translations[messageKey], translations[titleKey]);
+    });
   }
 }

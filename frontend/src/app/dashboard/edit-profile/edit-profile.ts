@@ -8,13 +8,14 @@ import { ServiceCategory } from '../../models/service-category.model';
 import { CategoryService } from '../../services/category';
 import { NotificationService } from '../../services/notification.service';
 import { forkJoin } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.html',
   styleUrls: ['./edit-profile.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, TranslateModule]
 })
 export class EditProfileComponent implements OnInit {
 
@@ -27,7 +28,8 @@ export class EditProfileComponent implements OnInit {
     private authService: AuthService,
     private workerService: WorkerService,
     private categoryService: CategoryService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -72,12 +74,12 @@ export class EditProfileComponent implements OnInit {
           this.worker.location = updatedProfile.location;
           this.worker.categories = updatedProfile.categories;
         }
-        this.notificationService.showSuccess('Perfil atualizado com sucesso!');
+        this.notificationService.showSuccess(this.translate.instant('DASHBOARD.EDIT_PROFILE.SUCCESS'));
         this.loading = false;
       },
       error: (err) => {
         console.error('Error updating profile', err);
-        this.notificationService.showError('Erro ao atualizar o perfil.');
+        this.notificationService.showError(this.translate.instant('DASHBOARD.EDIT_PROFILE.ERROR'));
         this.loading = false;
       }
     });

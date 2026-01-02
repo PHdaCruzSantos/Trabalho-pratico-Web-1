@@ -1,77 +1,14 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
 
-/* You can add global styles to this file, and also import other style files */
-
-/* Default and Contractor Theme */
-:root, .theme-contractor {
-  --color-primary: #3f51b5;
-  --color-secondary: #ff4081;
-}
-
-.dark:root, .dark .theme-contractor {
-  --color-primary: #7986cb; /* Lighter indigo for dark mode */
-  --color-secondary: #ff80ab; /* Lighter pink for dark mode */
-}
-
-/* Worker Theme */
-.theme-worker {
-  --color-primary: #00897b; /* Teal */
-  --color-secondary: #ffc107; /* Amber */
-}
-
-.dark .theme-worker {
-  --color-primary: #4db6ac; /* Lighter teal for dark mode */
-  --color-secondary: #ffd54f; /* Lighter amber for dark mode */
-}
-
-/* Tooltip styles */
-[data-tooltip-target] {
-  position: relative;
-  display: inline-block;
-}
-
-[data-tooltip-target]::before {
-  content: attr(data-tooltip-target);
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 10px; /* Add some space */
-  opacity: 0;
-  visibility: hidden;
-  background-color: #333;
-  color: #fff;
-  padding: 5px 8px;
-  border-radius: 4px;
-  font-size: 0.875rem; /* text-sm */
-  white-space: nowrap;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 1000;
-}
-
-[data-tooltip-target]:hover::before {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Optional: Add an arrow to the tooltip */
-[data-tooltip-target]::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 5px; /* Position it just above the tooltip body */
-  opacity: 0;
-  visibility: hidden;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #333 transparent; /* Arrow pointing up */
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 1000;
-}
-
-[data-tooltip-target]:hover::after {
-  opacity: 1;
-  visibility: visible;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background-light dark:bg-background-dark text-on-background-light dark:text-on-background-dark font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
 }

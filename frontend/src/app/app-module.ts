@@ -17,6 +17,14 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { ModalComponent } from './layout/modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
+export function HttpLoaderFactory() {
+  return new TranslateHttpLoader();
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,8 +33,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule, // Isso já importa as rotas
-    ToastrModule.forRoot(), // ToastrModule added
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+      },
+      defaultLanguage: 'pt-BR'
+    }),
     LayoutModule,
     HomeComponent,
     SearchResultsComponent,
@@ -36,6 +51,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule,
   ],
   providers: [
+    {
+      provide: TRANSLATE_HTTP_LOADER_CONFIG,
+      useValue: {
+        prefix: './assets/i18n/',
+        suffix: '.json'
+      }
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

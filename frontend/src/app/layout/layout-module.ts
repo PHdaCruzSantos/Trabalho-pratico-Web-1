@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar';
 import { FooterComponent } from './footer/footer';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -13,12 +14,14 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   exports: [
     NavbarComponent,
     FooterComponent,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ]
 })
 export class LayoutModule { }

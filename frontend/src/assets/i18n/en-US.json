@@ -1,0 +1,212 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "LOGIN": "Log in",
+    "SIGNUP": "Sign up",
+    "PROFILE": "My Profile",
+    "DASHBOARD": "Dashboard",
+    "LOGOUT": "Sign out",
+    "THEME": {
+      "LIGHT": "Light Mode",
+      "DARK": "Dark Mode",
+      "SYSTEM": "System",
+      "ITEMS": "Portfolio Items"
+    }
+  },
+  "NOTIFICATION": {
+    "SUCCESS": "Success",
+    "ERROR": "Error",
+    "INFO": "Info",
+    "WARNING": "Warning",
+    "LOGIN_SUCCESS": "Login successful!",
+    "LOGIN_ERROR": "Invalid credentials. Please try again.",
+    "LOGIN_ERROR_TITLE": "Login Error",
+    "REGISTER_SUCCESS": "Registration successful!",
+    "REGISTER_TITLE": "Registration Completed",
+    "REGISTER_ERROR": "Could not register. Please check your data.",
+    "REGISTER_ERROR_TITLE": "Registration Error",
+    "PROFILE_UPDATE_SUCCESS": "Profile updated successfully!",
+    "PROFILE_UPDATE_ERROR": "Error updating profile.",
+    "PORTFOLIO_ADD_SUCCESS": "Item added successfully!",
+    "PORTFOLIO_ADD_ERROR": "Error adding item.",
+    "PORTFOLIO_REMOVE_SUCCESS": "Item removed successfully!",
+    "PORTFOLIO_REMOVE_ERROR": "Error removing item."
+  },
+  "FOOTER": {
+    "TAGLINE": "Connecting talented professionals with clients who need their skills. Simple, fast, and secure.",
+    "PLATFORM": "Platform",
+    "COMPANY": "Company",
+    "SUPPORT": "Support",
+    "LINKS": {
+      "BROWSE": "Browse Services",
+      "HOW_IT_WORKS": "How it Works",
+      "PRICING": "Pricing",
+      "ABOUT": "About Us",
+      "CAREERS": "Careers",
+      "BLOG": "Blog",
+      "HELP": "Help Center",
+      "TERMS": "Terms of Service",
+      "PRIVACY": "Privacy Policy"
+    },
+    "COPY": "2025 ServiceHub. All rights reserved. PHdaCruzSantos"
+  },
+  "HOME": {
+    "HERO": {
+      "TITLE": "Find the Perfect Professional",
+      "SUBTITLE": "Connect with qualified experts for any service you need.",
+      "SEARCH_PLACEHOLDER": "What do you need done?",
+      "SEARCH_BTN": "Search",
+      "ALL_CATEGORIES": "All Categories",
+      "WELCOME_BACK": "Welcome back,",
+      "CONTRACTOR_SUBTITLE": "Find the best professionals for your next project.",
+      "SEARCH_NAME_PLACEHOLDER": "Search by name...",
+      "POPULAR_CATEGORIES": "Popular Categories",
+      "HOW_IT_WORKS": "How it Works",
+      "HOW_IT_WORKS_SUBTITLE": "Get your project done in three simple steps.",
+      "STEPS": {
+        "1": {
+          "TITLE": "1. Search",
+          "DESC": "Filter by category, name, or location to find exactly what you need."
+        },
+        "2": {
+          "TITLE": "2. Connect",
+          "DESC": "View detailed profiles, portfolios, and reviews from other clients."
+        },
+        "3": {
+          "TITLE": "3. Hire",
+          "DESC": "Contact the professional directly and get the job done."
+        }
+      },
+      "RECOMMENDED": "Recommended Professionals",
+      "RECOMMENDED_SUBTITLE": "Top rated workers in your area",
+      "VIEW_ALL": "View all",
+      "VIEW_PROFILE": "View Profile",
+      "CTA": {
+        "TITLE": "Are you a professional?",
+        "SUBTITLE": "Join us and grow your business.",
+        "BTN": "Get Started"
+      }
+    }
+  },
+  "AUTH": {
+    "DASHBOARD": {
+      "TITLE": "My Dashboard",
+      "ROLE_PROFESSIONAL": "Professional",
+      "NAV": {
+        "PROFILE": "My Profile",
+        "REQUESTS": "Requests",
+        "EDIT_PROFILE": "Edit Profile",
+        "PORTFOLIO": "Portfolio",
+        "BACK_HOME": "Back to Home"
+      }
+    },
+    "LOGIN": {
+      "TITLE": "Welcome Back",
+      "SUBTITLE": "Sign in to access your account",
+      "EMAIL": "Email Address",
+      "PASSWORD": "Password",
+      "FORGOT_PASSWORD": "Forgot password?",
+      "BTN": "Sign In",
+      "NO_ACCOUNT": "Don't have an account?",
+      "CREATE_ACCOUNT": "Create account",
+      "LOADING": "Signing In..."
+    },
+    "REGISTER": {
+      "TITLE": "Create Account",
+      "SUBTITLE": "Join ServiceHub today",
+      "NAME": "Full Name",
+      "EMAIL": "Email Address",
+      "PASSWORD": "Password",
+      "I_WANT_TO": "I want to...",
+      "HIRE": {
+        "TITLE": "Hire",
+        "DESC": "Find professionals"
+      },
+      "WORK": {
+        "TITLE": "Work",
+        "DESC": "Offer services"
+      },
+      "BTN": "Create Account",
+      "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+      "SIGN_IN": "Sign in",
+      "LOADING": "Creating Account..."
+    }
+  },
+  "DASHBOARD": {
+    "SIDEBAR": {
+      "MY_DASHBOARD": "My Dashboard",
+      "PROFESSIONAL": "Professional",
+      "PROFILE": "My Profile",
+      "REQUESTS": "Requests",
+      "EDIT_PROFILE": "Edit Profile",
+      "PORTFOLIO": "Portfolio",
+      "BACK_HOME": "Back to Home"
+    },
+    "EDIT_PROFILE": {
+       "TITLE": "Edit Profile",
+       "NAME": "Name",
+       "BIO": "Bio",
+       "BIO_PLACEHOLDER": "Tell us about yourself...",
+       "LOCATION": "Location",
+       "LOCATION_PLACEHOLDER": "City, State",
+       "CATEGORIES": "Service Categories",
+       "SAVE": "Save Changes",
+       "SAVING": "Saving...",
+       "SUCCESS": "Profile updated successfully!",
+       "ERROR": "Error updating profile."
+    }
+  },
+  "PROFILE": {
+    "HIRE_NOW": "Hire Now",
+    "FAVORITE": "Favorite",
+    "TABS": {
+      "PORTFOLIO": "Portfolio",
+      "REVIEWS": "Reviews"
+    },
+    "NO_PORTFOLIO": "No items in portfolio yet.",
+    "NO_REVIEWS": "No reviews yet.",
+    "LEAVE_REVIEW": "Leave a Review",
+    "RATING": "Your Rating",
+    "COMMENT": "Your Comment",
+    "SUBMIT_REVIEW": "Submit Review",
+    "SUBMITTING": "Submitting...",
+    "AVAILABLE": "Available",
+    "MEMBER_SINCE": "Member since",
+    "REVIEWS_COUNT": "reviews",
+    "AGO": "ago",
+    "DAYS": "days",
+    "HOURS": "hours",
+    "MINUTES": "minutes",
+    "JUST_NOW": "Just now",
+    "REVIEW_SUBMITTED": "Review submitted successfully!",
+    "REVIEW_ERROR": "Error submitting review."
+  },
+  "SEARCH": {
+    "TITLE": "Search Results",
+    "RESULTS_FOUND": "professionals found",
+    "NO_RESULTS": "No professionals found",
+    "TRY_ADJUSTING": "Try adjusting your search or filters to find what you're looking for.",
+    "VIEW_PROFILE": "View Profile",
+    "CLEAR": "Clear search"
+  },
+  "FAVORITES": {
+    "TITLE": "My Favorites",
+    "SUBTITLE": "Professionals you saved for later.",
+    "EMPTY_TITLE": "No favorites yet",
+    "EMPTY_DESC": "When you find professionals you like, they'll appear here.",
+    "BROWSE": "Browse Professionals"
+  },
+  "REQUESTS": {
+    "TITLE": "My Requests",
+    "SUBTITLE": "Track the status of your service requests.",
+    "STATUS": {
+      "PENDING": "Pending",
+      "ACCEPTED": "Accepted",
+      "REJECTED": "Rejected"
+    },
+    "CANCEL": "Cancel",
+    "MESSAGE": "Message",
+    "SENT_AGO": "Sent {{days}} days ago",
+    "SCHEDULED_FOR": "Scheduled for {{date}}"
+  }
+}

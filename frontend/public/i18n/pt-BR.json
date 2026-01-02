@@ -1,0 +1,170 @@
+{
+  "NAV": {
+    "HOME": "Início",
+    "LOGIN": "Entrar",
+    "SIGNUP": "Cadastrar",
+    "PROFILE": "Meu Perfil",
+    "DASHBOARD": "Painel",
+    "LOGOUT": "Sair",
+    "THEME": {
+      "LIGHT": "Modo Claro",
+      "DARK": "Modo Escuro",
+      "SYSTEM": "Sistema"
+    }
+  },
+  "FOOTER": {
+    "TAGLINE": "Conectando profissionais talentosos a clientes que precisam de suas habilidades. Simples, rápido e seguro.",
+    "PLATFORM": "Plataforma",
+    "COMPANY": "Empresa",
+    "SUPPORT": "Suporte",
+    "LINKS": {
+      "BROWSE": "Navegar Serviços",
+      "HOW_IT_WORKS": "Como Funciona",
+      "PRICING": "Preços",
+      "ABOUT": "Sobre Nós",
+      "CAREERS": "Carreiras",
+      "BLOG": "Blog",
+      "HELP": "Central de Ajuda",
+      "ITEMS": "Itens do Portfólio",
+      "TERMS": "Termos de Serviço",
+      "PRIVACY": "Política de Privacidade"
+    },
+    "COPYRIGHT": "© 2024 ServiceHub. Todos os direitos reservados."
+  },
+  "NOTIFICATION": {
+    "SUCCESS": "Sucesso",
+    "ERROR": "Erro",
+    "INFO": "Informação",
+    "WARNING": "Atenção",
+    "LOGIN_SUCCESS": "Login realizado com sucesso!",
+    "LOGIN_ERROR": "Credenciais inválidas. Por favor, tente novamente.",
+    "LOGIN_ERROR_TITLE": "Erro de Login",
+    "REGISTER_SUCCESS": "Cadastro realizado com sucesso!",
+    "REGISTER_TITLE": "Cadastro Concluído",
+    "REGISTER_ERROR": "Não foi possível realizar o cadastro. Verifique seus dados.",
+    "REGISTER_ERROR_TITLE": "Erro de Cadastro",
+    "PROFILE_UPDATE_SUCCESS": "Perfil atualizado com sucesso!",
+    "PROFILE_UPDATE_ERROR": "Erro ao atualizar o perfil.",
+    "PORTFOLIO_ADD_SUCCESS": "Item adicionado com sucesso!",
+    "PORTFOLIO_ADD_ERROR": "Erro ao adicionar o item.",
+    "PORTFOLIO_REMOVE_SUCCESS": "Item removido com sucesso!",
+    "PORTFOLIO_REMOVE_ERROR": "Erro ao remover o item."
+  },
+  "HOME": {
+    "HERO": {
+      "TITLE": "Encontre o Profissional Ideal",
+      "SUBTITLE": "Conecte-se com especialistas qualificados para qualquer serviço que você precisar.",
+      "SEARCH_PLACEHOLDER": "O que você precisa fazer?",
+      "SEARCH_BTN": "Buscar",
+      "ALL_CATEGORIES": "Todas as Categorias",
+      "WELCOME_BACK": "Bem-vindo de volta,",
+      "CONTRACTOR_SUBTITLE": "Encontre os melhores profissionais para o seu próximo projeto.",
+      "SEARCH_NAME_PLACEHOLDER": "Buscar por nome...",
+      "POPULAR_CATEGORIES": "Categorias Populares",
+      "HOW_IT_WORKS": "Como Funciona",
+      "HOW_IT_WORKS_SUBTITLE": "Realize seu projeto em três passos simples.",
+      "STEPS": {
+        "1": {
+          "TITLE": "1. Busque",
+          "DESC": "Filtre por categoria, nome ou localização para encontrar exatamente o que precisa."
+        },
+        "2": {
+          "TITLE": "2. Conecte-se",
+          "DESC": "Veja perfis detalhados, portfólios e avaliações de outros clientes."
+        },
+        "3": {
+          "TITLE": "3. Contrate",
+          "DESC": "Contate o profissional diretamente e realize o trabalho."
+        }
+      },
+      "RECOMMENDED": "Profissionais Recomendados",
+      "RECOMMENDED_SUBTITLE": "Profissionais mais bem avaliados na sua área",
+      "VIEW_ALL": "Ver todos",
+      "VIEW_PROFILE": "Ver Perfil",
+      "CTA": {
+        "TITLE": "Você é um profissional?",
+        "SUBTITLE": "Junte-se a nós e expanda seus negócios.",
+        "BTN": "Começar Agora"
+      }
+    }
+  },
+  "AUTH": {
+    "DASHBOARD": {
+      "TITLE": "Meu Painel",
+      "ROLE_PROFESSIONAL": "Profissional",
+      "NAV": {
+        "PROFILE": "Meu Perfil",
+        "REQUESTS": "Solicitações",
+        "EDIT_PROFILE": "Editar Perfil",
+        "PORTFOLIO": "Portfólio",
+        "BACK_HOME": "Voltar para Início"
+      }
+    },
+    "LOGIN": {
+      "TITLE": "Bem-vindo de volta",
+      "SUBTITLE": "Entre para acessar sua conta",
+      "EMAIL": "Endereço de Email",
+      "PASSWORD": "Senha",
+      "FORGOT_PASSWORD": "Esqueceu a senha?",
+      "BTN": "Entrar",
+      "NO_ACCOUNT": "Não tem uma conta?",
+      "CREATE_ACCOUNT": "Criar conta",
+      "LOADING": "Entrando..."
+    },
+    "REGISTER": {
+      "TITLE": "Criar Conta",
+      "SUBTITLE": "Junte-se ao ServiceHub hoje",
+      "NAME": "Nome Completo",
+      "EMAIL": "Endereço de Email",
+      "PASSWORD": "Senha",
+      "I_WANT_TO": "Eu quero...",
+      "HIRE": {
+        "TITLE": "Contratar",
+        "DESC": "Encontrar profissionais"
+      },
+      "WORK": {
+        "TITLE": "Trabalhar",
+        "DESC": "Oferecer serviços"
+      },
+      "BTN": "Criar Conta",
+      "ALREADY_HAVE_ACCOUNT": "Já tem uma conta?",
+      "SIGN_IN": "Entrar",
+      "LOADING": "Criando conta..."
+    }
+  },
+  "DASHBOARD": {
+    "SIDEBAR": {
+      "MY_DASHBOARD": "Meu Painel",
+      "PROFESSIONAL": "Profissional",
+      "PROFILE": "Meu Perfil",
+      "REQUESTS": "Solicitações",
+      "EDIT_PROFILE": "Editar Perfil",
+      "PORTFOLIO": "Portfólio",
+      "BACK_HOME": "Voltar para Início"
+    }
+  },
+  "PROFILE": {
+    "HIRE_NOW": "Contratar Agora",
+    "FAVORITE": "Favoritar",
+    "TABS": {
+      "PORTFOLIO": "Portfólio",
+      "REVIEWS": "Avaliações"
+    },
+    "NO_PORTFOLIO": "Nenhum item no portfólio ainda.",
+    "NO_REVIEWS": "Nenhuma avaliação ainda.",
+    "LEAVE_REVIEW": "Deixar uma avaliação",
+    "RATING": "Sua Avaliação",
+    "COMMENT": "Seu Comentário",
+    "SUBMIT_REVIEW": "Enviar Avaliação",
+    "SUBMITTING": "Enviando...",
+    "AVAILABLE": "Disponível"
+  },
+  "SEARCH": {
+    "TITLE": "Resultados da Busca",
+    "RESULTS_FOUND": "profissionais encontrados",
+    "NO_RESULTS": "Nenhum profissional encontrado",
+    "TRY_ADJUSTING": "Tente ajustar sua busca ou filtros para encontrar o que procura.",
+    "VIEW_PROFILE": "Ver Perfil",
+    "CLEAR": "Limpar busca"
+  }
+}

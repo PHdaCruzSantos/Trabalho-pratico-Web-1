@@ -54,6 +54,10 @@ export class AuthService {
     );
   }
 
+  updateProfile(data: { name?: string; email?: string }): Observable<User> {
+    return this.updateMe(data);
+  }
+
   getMe(): Observable<User> {
     return this.http.get<{ user: User }>(`${this.apiUrl}/me`).pipe(
       map((response) => response.user),

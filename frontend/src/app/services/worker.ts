@@ -18,6 +18,7 @@ export class WorkerService {
     category?: string;
     name?: string;
     location?: string;
+    search?: string;
   }): Observable<WorkerProfile[]> {
     let httpParams = new HttpParams();
     if (params) {
@@ -29,6 +30,9 @@ export class WorkerService {
       }
       if (params.location) {
         httpParams = httpParams.set('location', params.location);
+      }
+      if (params.search) {
+        httpParams = httpParams.set('search', params.search);
       }
     }
     return this.http.get<WorkerProfile[]>(this.apiUrl, { params: httpParams });

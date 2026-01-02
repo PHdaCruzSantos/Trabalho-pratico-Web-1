@@ -1,6 +1,7 @@
-import { Component, OnInit, Renderer2, signal } from '@angular/core';
-import { AuthService } from './services/auth';
-import { Role } from './models/user.model';
+import { Component, OnInit, signal } from '@angular/core';
+import { ThemeService } from './services/theme.service';
+
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,22 +12,16 @@ import { Role } from './models/user.model';
 export class AppComponent implements OnInit {
   protected readonly title = signal('frontend');
 
-  constructor(private authService: AuthService, private renderer: Renderer2) {}
+  constructor(
+    private themeService: ThemeService,
+    private translate: TranslateService
+  ) {
+    this.translate.addLangs(['pt-BR', 'en-US']);
+    // this.translate.setDefaultLang('pt-BR');
+    this.translate.use('pt-BR');
+  }
 
   ngOnInit() {
-    this.authService.currentUser$.subscribe(user => {
-      if (user) {
-        if (user.role === Role.TRABALHADOR) {
-          this.renderer.addClass(document.body, 'theme-worker');
-          this.renderer.removeClass(document.body, 'theme-contractor');
-        } else if (user.role === Role.CONTRATANTE) {
-          this.renderer.addClass(document.body, 'theme-contractor');
-          this.renderer.removeClass(document.body, 'theme-worker');
-        }
-      } else {
-        this.renderer.removeClass(document.body, 'theme-worker');
-        this.renderer.removeClass(document.body, 'theme-contractor');
-      }
-    });
+    this.themeService.initTheme();
   }
 }
