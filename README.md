@@ -1,84 +1,112 @@
-# **CSI606-2025-01 - Proposta de Trabalho Final**
+# 🛠️ Catálogo de Serviços (WorkLink)
 
-## _Discente: Pedro Henrique da Cruz Santos (21.1.8148)_
+**Trabalho Prático - Disciplina Web 1 (CSI606-2025-01)**  
+_Discente: Pedro Henrique da Cruz Santos (21.1.8148)_
 
-### Resumo
+---
+
+## 📖 Sobre o Projeto
+
+O **Catálogo de Serviços** (também referenciado conceitualmente como *WorkLink*) é uma plataforma web *two-sided marketplace* projetada para conectar **Clientes (Contratantes)** a **Profissionais Autônomos (Trabalhadores)** locais. 
+
+A aplicação visa solucionar o problema de visibilidade de profissionais independentes, permitindo que construam uma vitrine digital de seus trabalhos (Portfólio) e construam reputação através de avaliações. Paralelamente, oferece aos clientes uma ferramenta de busca eficiente para encontrar mão de obra qualificada na sua região e solicitar serviços de forma ágil e centralizada.
 
 ![preview](./previewTPWeb.png)
 
-Este projeto consiste em uma plataforma web, chamada "Catálogo de Serviços", projetada para conectar clientes (Contratantes) a profissionais autônomos (Trabalhadores) para a prestação de serviços locais. A aplicação permite que trabalhadores criem perfis detalhados, incluindo uma biografia, localização e um portfólio de trabalhos anteriores. Os contratantes podem buscar por profissionais utilizando filtros de nome, categoria de serviço ou localização, visualizar seus perfis completos com portfólios e avaliações, e também deixar suas próprias avaliações após a contratação, fomentando um ecossistema de confiança e qualidade.
+---
 
-### 1. Tema
+## Arquitetura e Stack Tecnológico
 
-O trabalho final tem como tema o desenvolvimento de uma aplicação web de duas-faces (two-sided marketplace) para a busca e oferta de serviços locais.
+O projeto foi construído seguindo uma arquitetura robusta **Full-Stack**, separando claramente as responsabilidades entre a API (Backend) e a Interface de Usuário (Frontend).
 
-### 2. Escopo
+### Frontend (Client-Side)
+Desenvolvido como uma **Single Page Application (SPA)** de alta performance estruturada em componentes independentes.
 
-Este projeto terá as seguintes funcionalidades:
+* **Framework:** Angular 17+ (Standalone Components).
+* **Estilização:** Tailwind CSS (garantindo responsividade e Design System customizado com suporte a Dark Mode abstrato).
+* **Internacionalização (i18n):** Integração com `ngx-translate` para suporte a múltiplos idiomas (Inglês e Português).
+* **Comunicação:** `HttpClient` do Angular com Observables (RxJS) lidando com requisições assíncronas de forma reativa.
+* **UX/UI:** Componentes interativos, Modais de requisição dinâmicos, Notificações (Toasts) amigáveis e feedback de "*Loading States*" durante resoluções de rede.
 
-- **Autenticação e Perfis de Usuário:**
+### Backend (Server-Side)
+Uma API RESTful performática que processa todas as regras de negócio e validações de segurança da plataforma.
 
-  - Dois tipos de papéis: `CONTRATANTE` e `TRABALHADOR`.
-  - Sistema de registro e login com autenticação baseada em token (JWT).
+* **Ambiente:** Node.js com Express.js.
+* **Linguagem:** TypeScript (Garantindo tipagem estática e segurança do código).
+* **Banco de Dados:** SQLite (leve e portátil, ideal para o escopo do trabalho prático).
+* **ORM (Database Access):** Prisma ORM responsável pela modelagem do schema relacional, migrações e comunicação type-safe com o banco de dados.
+* **Segurança e Autenticação:** 
+  * Senhas hasheadas e salteadas utilizando a biblioteca `bcrypt`.
+  * Middleware de autenticação baseado em `JSON Web Tokens (JWT)`.
+  * Proteção e autorização de rotas com base no `Role` do usuário logado (Contratante vs Trabalhador).
 
-- **Para Trabalhadores:**
+---
 
-  - Dashboard pessoal para gerenciamento do perfil.
-  - Criação e edição de perfil profissional, incluindo bio, localização e categorias de serviço.
-  - Gerenciamento de um portfólio, permitindo adicionar e remover projetos com título, descrição e URL de imagem.
-  - Visualização do próprio perfil público.
+## Funcionalidades Principais
 
-- **Para Contratantes:**
+### Autenticação e Gestão de Perfis
+- Registro e Login diferenciado entre Perfil **CONTRATANTE** e **TRABALHADOR**.
+- O Trabalhador gerencia suas informações como Nome, Profissão, Biografia Explicativa e Localização da área de atuação.
 
-  - Busca avançada de trabalhadores por nome, categoria ou localização.
-  - Visualização de perfis de trabalhadores, incluindo portfólio e avaliações de outros clientes.
-  - Possibilidade de submeter avaliações (nota e comentário) para os perfis dos trabalhadores.
+### Painel do Trabalhador (Worker Dashboard)
+- **Gestão de Portfólio:** O profissional pode fazer upload e curadoria visual de artes, instalações, ou serviços anteriores prestando contas de seu talento num grid dinâmico.
+- **Caixa de Entrada (Job Requests):** Tela dedicada para monitoramento de propostas de serviços recebidas por clientes, podendo gerenciar o ciclo de vida alterando o status para `ACEITO` ou `RECUSADO`.
 
-- **Funcionalidades Gerais:**
-  - Página inicial com barra de busca e listagem de categorias principais.
-  - Página de resultados de busca.
-  - Interface responsiva e temática que se adapta ao tipo de usuário logado (Contratante ou Trabalhador).
+### Experiência do Contratante (Client Experience)
+- **Busca Avançada:** Filtros interativos para localizar profissionais por nome da ocupação ou categorias de atuação (ex: Elétrica, Hidráulica, Design).
+- **Home Dinâmica:** View Customizada - a homepage exibe CTAs motivacionais para usuários convidados, mas otimiza a tela apenas com os catálogos para usuários já integrados.
+- **Workflow de Contratação ("Hire Now"):** Um Contratante pode visitar o perfil público do profissional, validar sua reputação (Rating/Reviews) e abrir um Modal de Contratação detalhando o serviço a ser feito.
 
-### 3. Restrições
+### Sistema de Reputação
+- Após as contratações, os usuários alimentam o sistema de avaliações, onde notas (1 a 5 estrelas) e análises escritas são adicionadas permanentemente ao perfil de quem executou a atividade, gerando um Ranking natural exposto na Homepage da plataforma.
 
-Neste trabalho não serão considerados:
+---
 
-- Sistema de chat ou comunicação em tempo real entre os usuários.
-- Processamento de pagamentos ou gerenciamento de transações financeiras.
-- Um sistema de verificação para confirmar se um serviço foi de fato prestado antes de permitir uma avaliação.
-- Upload direto de arquivos de imagem; o portfólio utiliza URLs de imagens externas.
-- Algoritmos complexos de recomendação; a seção de "recomendados" é uma amostragem simples.
+## Como Clonar e Rodar Localmente
 
-### 4. Protótipo
+Certifique-se de ter o [Node.js](https://nodejs.org/) (versão 18+) instalado na sua máquina.
 
-O protótipo funcional da aplicação já está implementado neste repositório. As principais telas desenvolvidas incluem:
+### 1. Preparando o Backend
+Abra um terminal e acesse a pasta `backend`:
+```bash
+cd backend
+npm install
+```
 
-- **Página Inicial:** Apresentação da plataforma e ferramenta de busca.
-- **Página de Resultados da Busca:** Exibe a lista de trabalhadores encontrados.
-- **Página de Perfil do Trabalhador:** Detalhes completos do profissional, portfólio e avaliações.
-- **Dashboard do Trabalhador:** Área para edição de perfil e gerenciamento de portfólio.
-- **Modal de Autenticação:** Formulários de Login e Cadastro.
+Configure o Banco de Dados gerando os artefatos do Prisma, inserindo as sementes (Seed) de teste predefinidas:
+```bash
+npx prisma generate
+npx prisma migrate dev
+npx prisma db seed
+```
+> *Nota:* O Seed populou o banco com categorias realistas, o perfil "João Eletricista" (`joao@email.com` | senha: `password`), clientes de teste e propostas (Requests) para você já visualizar coisas na tela!
 
-O frontend foi desenvolvido com Angular e o backend com Node.js/Express, e a interação entre eles simula o funcionamento completo da aplicação final.
+Por fim, inicie o servidor da API:
+```bash
+npm start
+```
+*A API estará rodando por padrão em `http://localhost:3000`*.
 
-### 5. Referências
+### 2. Preparando o Frontend
+Em um **novo terminal**, navegue até a pasta `frontend`:
+```bash
+cd frontend
+npm install
+```
 
-Não foram utilizadas referências externas diretas para a concepção do modelo de negócio, baseando-se em plataformas de serviço de conhecimento geral.
+Inicie o servidor de desenvolvimento do Angular:
+```bash
+npm start
+```
 
-## TODO:
+Abra seu navegador em [http://localhost:4200](http://localhost:4200). A plataforma estará viva, funcional e pronta para uso! 🎉
 
-### Fixes
-- [ ] Arrumar perfil de user != perfil de worker
-- [ ] Arrumar hover e incicação de botoes, adicionando cursor: pointer
-- [ ] Ajustar posição dos toasts de feedback
-- [ ] Arrumar opacidade e posição do header nas telas de resultados de busca e perfil do trabalhador
+---
 
-### Features
-- [ ] Adicionar icones e melhorar a itendificação das profissoes, adicionar mais categorias.
-- [ ] Melhorar a interface de login e cadastro, adicionar mais campos de preenchimento.
-- [ ] Adicionar mais funcionalidades ao dashboard do trabalhador, como a possibilidade de adicionar mais projetos ao portfólio.
-- [ ] Adicionar medalhas e verificação de trabalhadores.
-- [ ] Adicionar sistema de chat entre contratantes e trabalhadores.
-- [ ] Adicionar busca por localidade, proximidade entre contratante e trabalhador. Exibindo um mapa com os resultados.
-- [ ] Adicionar redes sociais e links para o perfil do trabalhador.
+## Conclusão e Limitações do Escopo
+O projeto excedeu os requisitos básicos do framework da disciplina focando não apenas num CRUD simples, mas em uma aplicação realista do início ao fim usando padrões da indústria (Tokens, RxJS, ORMs, Middlewares, Full-Stack Request Life-cycle).
 
+Por restrição de escopo acadêmico desta entrega, as seguintes lógicas não estão implementadas:
+- Gateway de processamentos financeiros e de pagamento (Stripe/PayPal).
+- Mensageria em tempo real (Chat interno via WebSockets entre cliente e profissional).
+- Verificação de Autenticidade em Duas Etapas ou moderação de contas por Admins.
