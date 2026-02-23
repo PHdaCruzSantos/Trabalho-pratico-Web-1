@@ -11,6 +11,8 @@ import { NotificationService } from '../services/notification.service';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ModalService } from '../services/modal.service';
+import { RequestModalComponent } from './request-modal/request-modal.component';
 
 @Component({
   selector: 'app-worker-profile',
@@ -22,6 +24,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class WorkerProfileComponent implements OnInit {
   worker: WorkerProfile | undefined;
   currentUser: User | null = null;
+  isOwnProfile = false;
   canReview = false;
   newReview = { rating: 5, comment: '' };
   submittingReview = false;
@@ -33,8 +36,9 @@ export class WorkerProfileComponent implements OnInit {
     private authService: AuthService,
     private reviewService: ReviewService,
     private notificationService: NotificationService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private modalService: ModalService
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap
@@ -59,8 +63,9 @@ export class WorkerProfileComponent implements OnInit {
         this.worker = worker;
         this.authService.currentUser$.subscribe((user) => {
           this.currentUser = user;
+          this.isOwnProfile = !!user && !!this.worker && user.id === this.worker.user.id;
           this.canReview =
-            user?.role === Role.CONTRATANTE && !!this.worker && user.id !== this.worker.id;
+            user?.role === Role.CONTRATANTE && !!this.worker && !this.isOwnProfile;
         });
       });
   }
@@ -88,6 +93,21 @@ export class WorkerProfileComponent implements OnInit {
             this.submittingReview = false;
           },
         });
+    }
+  }
+
+  openRequestModal(): void {
+    if (this.worker && this.currentUser) {
+      if (this.currentUser.role !== Role.CONTRATANTE) {
+        this.notificationService.showError('Apenas perfis de clientes podem solicitar serviços.');
+        return;
+      }
+      this.modalService.open(RequestModalComponent, {
+        workerId: this.worker.id,
+        workerName: this.worker.user.name
+      });
+    } else {
+      this.notificationService.showError('Você precisa criar uma conta para contratar profissionais.');
     }
   }
 }

@@ -27,6 +27,7 @@ model User {
   role          Role
   workerProfile WorkerProfile?
   reviews       Review[]
+  clientRequests ServiceRequest[] @relation("ClientRequests")
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 }
@@ -40,6 +41,7 @@ model WorkerProfile {
   portfolio   PortfolioItem[]
   reviews     Review[]
   categories  ServiceCategory[] @relation("CategoryToWorker")
+  requests    ServiceRequest[] @relation("WorkerRequests")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -71,4 +73,17 @@ model ServiceCategory {
   id      String   @id @default(cuid())
   name    String   @unique
   workers WorkerProfile[] @relation("CategoryToWorker")
+}
+
+model ServiceRequest {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  status      String        @default("PENDING") // PENDING, ACCEPTED, REJECTED, CANCELLED
+  client      User          @relation("ClientRequests", fields: [clientId], references: [id])
+  clientId    String
+  worker      WorkerProfile @relation("WorkerRequests", fields: [workerId], references: [id])
+  workerId    String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }

@@ -1,48 +1,110 @@
-<h1 class="text-2xl font-bold text-on-surface-light dark:text-on-surface-dark mb-6">{{ 'DASHBOARD.REQUESTS.TITLE' | translate }}</h1>
+<h1 class="text-2xl font-bold text-on-surface-light dark:text-on-surface-dark mb-6">{{ 'DASHBOARD.REQUESTS.TITLE' |
+  translate }}</h1>
 
-<div *ngIf="jobRequests.length > 0; else noRequests" class="space-y-4">
-  <div *ngFor="let request of jobRequests" class="bg-surface-light dark:bg-surface-dark rounded-lg shadow-md p-6 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
-    <div class="flex justify-between items-start">
-      <div>
-        <h2 class="text-xl font-bold text-on-surface-light dark:text-on-surface-dark">{{ request.title }}</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-400">{{ 'DASHBOARD.REQUESTS.SENT_BY' | translate }} {{ request.clientName }}</p>
+<div *ngIf="loading" class="flex justify-center py-12">
+  <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+</div>
+
+<div *ngIf="!loading && jobRequests.length > 0; else noRequests"
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+  <div *ngFor="let request of jobRequests"
+    class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full"
+    [ngClass]="{
+         'border-t-4 border-t-yellow-400': request.status === 'PENDING',
+         'border-t-4 border-t-green-500': request.status === 'ACCEPTED',
+         'border-t-4 border-t-red-500': request.status === 'REJECTED' || request.status === 'CANCELLED'
+       }">
+
+    <!-- Card Header (Title & Status) -->
+    <div class="px-6 pt-6 pb-4 border-b border-gray-50 dark:border-surface-dark/50 flex-none">
+      <div class="flex justify-between items-start gap-4 mb-4">
+        <h2 class="text-xl font-bold text-on-surface-light dark:text-on-surface-dark line-clamp-2 leading-tight flex-1">
+          {{ request.title }}</h2>
+        <span [ngClass]="{
+            'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-400 ring-1 ring-yellow-400/30': request.status === 'PENDING',
+            'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400 ring-1 ring-green-500/30': request.status === 'ACCEPTED',
+            'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400 ring-1 ring-red-500/30': request.status === 'REJECTED' || request.status === 'CANCELLED'
+          }"
+          class="text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap shadow-sm flex items-center gap-1.5">
+          <div class="w-1.5 h-1.5 rounded-full" [ngClass]="{
+              'bg-yellow-500': request.status === 'PENDING',
+              'bg-green-500': request.status === 'ACCEPTED',
+              'bg-red-500': request.status === 'REJECTED' || request.status === 'CANCELLED'
+            }"></div>
+          {{ request.status | titlecase }}
+        </span>
       </div>
-      <span
-        [ngClass]="{
-          'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300': request.status === 'pending',
-          'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300': request.status === 'accepted',
-          'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300': request.status === 'rejected'
-        }"
-        class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
-      >
-        {{ request.status | titlecase }}
-      </span>
+
+      <!-- Requester Info -->
+      <div class="flex items-center gap-3">
+        <div
+          class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm shadow-inner shadow-primary/20 border border-primary/10">
+          {{ (request.client?.name || 'C').charAt(0).toUpperCase() }}
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide">{{
+            'DASHBOARD.REQUESTS.SENT_BY' | translate }}</span>
+          <span class="text-sm font-semibold text-on-surface-light dark:text-on-surface-dark">{{ request.client?.name ||
+            'Cliente'
+            }}</span>
+        </div>
+      </div>
     </div>
 
-    <p class="mt-4 text-on-surface-light dark:text-on-surface-dark">{{ request.description }}</p>
-
-    <div *ngIf="request.status === 'pending'" class="mt-6 flex justify-end space-x-4">
-      <button (click)="rejectRequest(request)" class="btn-secondary">
-        {{ 'DASHBOARD.REQUESTS.REJECT' | translate }}
-      </button>
-      <button (click)="acceptRequest(request)" class="btn-primary">
-        {{ 'DASHBOARD.REQUESTS.ACCEPT' | translate }}
-      </button>
+    <!-- Description -->
+    <div class="p-6 flex-1 bg-gray-50/50 dark:bg-surface-dark/30 border-b border-gray-50 dark:border-surface-dark/50">
+      <p class="text-on-surface-light/80 dark:text-on-surface-dark/80 text-sm leading-relaxed">{{ request.description }}
+      </p>
     </div>
 
-    <div *ngIf="request.status !== 'pending'" class="mt-6 text-right">
-      <p *ngIf="request.status === 'accepted'" class="font-semibold text-green-600 dark:text-green-400">{{ 'DASHBOARD.REQUESTS.ACCEPTED' | translate }}</p>
-      <p *ngIf="request.status === 'rejected'" class="font-semibold text-red-600 dark:text-red-400">{{ 'DASHBOARD.REQUESTS.REJECTED' | translate }}</p>
+    <!-- Action Bar -->
+    <div
+      class="p-5 bg-white dark:bg-surface-dark mt-auto flex-none border-t border-gray-100 dark:border-surface-dark/50">
+      <div *ngIf="request.status === 'PENDING'" class="flex justify-end gap-3 w-full">
+        <button (click)="rejectRequest(request)"
+          class="flex-1 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20 font-semibold rounded-xl transition-colors focus:ring-2 focus:ring-red-500/50 outline-none text-sm border border-transparent hover:border-red-200 dark:hover:border-red-900">
+          {{ 'DASHBOARD.REQUESTS.REJECT' | translate }}
+        </button>
+        <button (click)="acceptRequest(request)"
+          class="flex-1 px-4 py-2 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl shadow-md shadow-primary/20 hover:shadow-primary/40 transition-all focus:ring-2 focus:ring-primary/50 outline-none text-sm">
+          {{ 'DASHBOARD.REQUESTS.ACCEPT' | translate }}
+        </button>
+      </div>
+
+      <div *ngIf="request.status !== 'PENDING'" class="w-full flex justify-center items-center py-2 h-9">
+        <div *ngIf="request.status === 'ACCEPTED'" class="flex items-center gap-2 text-green-600 dark:text-green-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+              clip-rule="evenodd" />
+          </svg>
+          <span class="font-semibold text-sm">{{ 'DASHBOARD.REQUESTS.ACCEPTED' | translate }}</span>
+        </div>
+
+        <div *ngIf="request.status === 'REJECTED' || request.status === 'CANCELLED'"
+          class="flex items-center gap-2 text-red-600 dark:text-red-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+              clip-rule="evenodd" />
+          </svg>
+          <span class="font-semibold text-sm">{{ request.status === 'CANCELLED' ? 'Cancelado pelo Cliente' :
+            ('DASHBOARD.REQUESTS.REJECTED' | translate) }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <ng-template #noRequests>
   <div class="text-center py-12">
-    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
     </svg>
-    <h3 class="mt-2 text-sm font-medium text-on-surface-light dark:text-on-surface-dark">{{ 'DASHBOARD.REQUESTS.NO_REQUESTS' | translate }}</h3>
+    <h3 class="mt-2 text-sm font-medium text-on-surface-light dark:text-on-surface-dark">{{
+      'DASHBOARD.REQUESTS.NO_REQUESTS' | translate }}</h3>
     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ 'DASHBOARD.REQUESTS.NO_REQUESTS_DESC' | translate }}</p>
   </div>
 </ng-template>

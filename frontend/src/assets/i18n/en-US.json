@@ -143,17 +143,39 @@
       "BACK_HOME": "Back to Home"
     },
     "EDIT_PROFILE": {
-       "TITLE": "Edit Profile",
-       "NAME": "Name",
-       "BIO": "Bio",
-       "BIO_PLACEHOLDER": "Tell us about yourself...",
-       "LOCATION": "Location",
-       "LOCATION_PLACEHOLDER": "City, State",
-       "CATEGORIES": "Service Categories",
-       "SAVE": "Save Changes",
-       "SAVING": "Saving...",
-       "SUCCESS": "Profile updated successfully!",
-       "ERROR": "Error updating profile."
+      "TITLE": "Edit Profile",
+      "NAME": "Name",
+      "BIO": "Bio",
+      "BIO_PLACEHOLDER": "Tell us about yourself...",
+      "LOCATION": "Location",
+      "LOCATION_PLACEHOLDER": "City, State",
+      "CATEGORIES": "Service Categories",
+      "SAVE": "Save Changes",
+      "SAVING": "Saving...",
+      "SUCCESS": "Profile updated successfully!",
+      "ERROR": "Error updating profile."
+    },
+    "PORTFOLIO": {
+      "TITLE": "Portfolio",
+      "ADD_NEW": "Add New Item",
+      "ITEM_TITLE": "Title",
+      "ITEM_TITLE_PLACEHOLDER": "e.g., Landing Page Development",
+      "ITEM_DESC": "Description",
+      "ITEM_DESC_PLACEHOLDER": "Describe the project...",
+      "ITEM_IMAGE": "Image URL",
+      "ADD": "Add Item",
+      "ADDING": "Adding...",
+      "ITEMS": "Your Portfolio Items"
+    },
+    "REQUESTS": {
+      "TITLE": "Job Requests",
+      "SENT_BY": "Sent by",
+      "REJECT": "Reject",
+      "ACCEPT": "Accept",
+      "ACCEPTED": "Request Accepted",
+      "REJECTED": "Request Rejected",
+      "NO_REQUESTS": "No pending requests",
+      "NO_REQUESTS_DESC": "You don't have any job requests at the moment."
     }
   },
   "PROFILE": {
@@ -167,6 +189,13 @@
     "NO_REVIEWS": "No reviews yet.",
     "LEAVE_REVIEW": "Leave a Review",
     "RATING": "Your Rating",
+    "RATING_STARS": {
+      "5": "5 Stars",
+      "4": "4 Stars",
+      "3": "3 Stars",
+      "2": "2 Stars",
+      "1": "1 Star"
+    },
     "COMMENT": "Your Comment",
     "SUBMIT_REVIEW": "Submit Review",
     "SUBMITTING": "Submitting...",

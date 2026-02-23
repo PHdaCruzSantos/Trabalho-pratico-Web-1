@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private workerService: WorkerService,
     private modalService: ModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe((categories) => {
@@ -39,12 +39,12 @@ export class HomeComponent implements OnInit {
 
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
-      if (user && user.role === Role.CONTRATANTE) {
-        // Por agora, vamos apenas pegar alguns trabalhadores como "mais bem recomendados"
-        this.workerService.getWorkers({}).subscribe((workers) => {
-          this.topRatedWorkers = workers.slice(0, 6); // Limita a 6 para o dashboard
-        });
-      }
+    });
+
+    // Fetch top rated workers for all users (guests and authenticated)
+    this.workerService.getWorkers({}).subscribe((workers) => {
+      // Here we could sort by review rating if the API supports it
+      this.topRatedWorkers = workers.slice(0, 6);
     });
   }
 

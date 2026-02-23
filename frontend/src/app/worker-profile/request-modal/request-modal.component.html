@@ -1,0 +1,90 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 sm:p-6"
+    (click)="closeModal()">
+    <div class="bg-surface-light dark:bg-surface-dark rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl transform transition-all"
+        (click)="$event.stopPropagation()">
+        <!-- Header -->
+        <div class="relative bg-gradient-to-r from-primary to-secondary p-8 text-white">
+            <div class="absolute inset-0 bg-black/10"></div>
+            <div class="relative z-10 flex justify-between items-start">
+                <div>
+                    <h2 class="text-3xl font-bold font-display tracking-tight">{{ 'PROFILE.HIRE_NOW' | translate }}</h2>
+                    <p class="text-white/80 mt-2">Enviar proposta para {{ workerName }}</p>
+                </div>
+                <button (click)="closeModal()"
+                    class="text-white/80 hover:text-white bg-black/10 hover:bg-black/20 rounded-full p-2 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="p-8">
+
+            <!-- Success State -->
+            <div *ngIf="success" class="flex flex-col items-center justify-center py-8 text-center animate-fade-in">
+                <div
+                    class="w-20 h-20 bg-green-100 dark:bg-green-900/30 text-green-500 rounded-full flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-on-surface-light dark:text-on-surface-dark mb-2">Solicitação enviada!
+                </h3>
+                <p class="text-on-surface-light/70 dark:text-on-surface-dark/70">O profissional receberá seu pedido e
+                    retornará em breve.</p>
+            </div>
+
+            <!-- Form -->
+            <form *ngIf="!success" (ngSubmit)="submitRequest()" class="space-y-6">
+
+                <div *ngIf="errorMessage"
+                    class="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-4 rounded-xl text-sm font-medium flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        class="w-5 h-5 flex-shrink-0">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    {{ errorMessage }}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-on-surface-light dark:text-on-surface-dark mb-2">
+                        Resumo do Serviço
+                    </label>
+                    <input type="text" [(ngModel)]="title" name="title" placeholder="Ex: Troca de fiação da sala"
+                        class="w-full px-4 py-3 bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-on-background-light dark:text-on-background-dark placeholder-gray-400">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-on-surface-light dark:text-on-surface-dark mb-2">
+                        Detalhes da Solicitação
+                    </label>
+                    <textarea [(ngModel)]="description" name="description" rows="4"
+                        placeholder="Descreva o que preicsa ser feito, o tamanho do projeto, ou detalhes do problema atual..."
+                        class="w-full px-4 py-3 bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-on-background-light dark:text-on-background-dark placeholder-gray-400 resize-none"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4 pt-4">
+                    <button type="button" (click)="closeModal()" [disabled]="loading"
+                        class="flex-1 px-6 py-3 bg-surface-variant-light dark:bg-surface-variant-dark text-on-surface-light dark:text-on-surface-dark rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors disabled:opacity-50">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" [disabled]="loading"
+                        class="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold shadow-lg shadow-primary/30 transition-all duration-300 disabled:opacity-70">
+                        <span *ngIf="loading"
+                            class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                        <span *ngIf="!loading">Enviar Pedido</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

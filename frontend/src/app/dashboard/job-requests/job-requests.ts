@@ -1,16 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-
-type JobRequestStatus = 'pending' | 'accepted' | 'rejected';
-
-interface JobRequest {
-  id: number;
-  title: string;
-  description: string;
-  clientName: string;
-  status: JobRequestStatus;
-}
+import { RequestService, ServiceRequest } from '../../services/request';
 
 @Component({
   selector: 'app-job-requests',
@@ -21,46 +12,44 @@ interface JobRequest {
 })
 export class JobRequestsComponent implements OnInit {
 
-  jobRequests: JobRequest[] = [];
+  jobRequests: ServiceRequest[] = [];
+  loading = true;
+
+  constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
-    this.jobRequests = [
-      {
-        id: 1,
-        title: 'Desenvolvimento de Landing Page',
-        description: 'Preciso de uma landing page para meu novo produto. O design já está pronto.',
-        clientName: 'Ana Clara',
-        status: 'pending'
+    this.loadRequests();
+  }
+
+  loadRequests(): void {
+    this.loading = true;
+    this.requestService.getWorkerRequests().subscribe({
+      next: (data) => {
+        this.jobRequests = data;
+        this.loading = false;
       },
-      {
-        id: 2,
-        title: 'Conserto de Encanamento',
-        description: 'Vazamento na pia da cozinha. Urgente!',
-        clientName: 'Pedro Pascal',
-        status: 'pending'
-      },
-      {
-        id: 3,
-        title: 'Aula de Violão',
-        description: 'Gostaria de agendar uma aula de violão para iniciantes.',
-        clientName: 'Joana Marques',
-        status: 'accepted'
-      },
-      {
-        id: 4,
-        title: 'Formatação de Computador',
-        description: 'Meu computador está muito lento, preciso formatar e instalar o Windows 11.',
-        clientName: 'Lucas Moura',
-        status: 'rejected'
+      error: (err) => {
+        console.error('Error fetching worker requests', err);
+        this.loading = false;
       }
-    ];
+    });
   }
 
-  acceptRequest(request: JobRequest): void {
-    request.status = 'accepted';
+  acceptRequest(request: ServiceRequest): void {
+    if (confirm('Tem certeza que deseja aceitar esta solicitação? Ela não poderá ser cancelada depois!')) {
+      this.requestService.updateRequestStatus(request.id, 'ACCEPTED').subscribe({
+        next: () => this.loadRequests(),
+        error: (err) => console.error('Error accepting request', err)
+      });
+    }
   }
 
-  rejectRequest(request: JobRequest): void {
-    request.status = 'rejected';
+  rejectRequest(request: ServiceRequest): void {
+    if (confirm('Tem certeza que deseja recusar esta solicitação definitivamente?')) {
+      this.requestService.updateRequestStatus(request.id, 'REJECTED').subscribe({
+        next: () => this.loadRequests(),
+        error: (err) => console.error('Error rejecting request', err)
+      });
+    }
   }
 }

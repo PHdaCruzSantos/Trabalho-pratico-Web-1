@@ -144,17 +144,39 @@
       "BACK_HOME": "Voltar para Início"
     },
     "EDIT_PROFILE": {
-       "TITLE": "Editar Perfil",
-       "NAME": "Nome",
-       "BIO": "Biografia",
-       "BIO_PLACEHOLDER": "Conte-nos sobre você...",
-       "LOCATION": "Localização",
-       "LOCATION_PLACEHOLDER": "Cidade, Estado",
-       "CATEGORIES": "Categorias de Serviço",
-       "SAVE": "Salvar Alterações",
-       "SAVING": "Salvando...",
-       "SUCCESS": "Perfil atualizado com sucesso!",
-       "ERROR": "Erro ao atualizar perfil."
+      "TITLE": "Editar Perfil",
+      "NAME": "Nome",
+      "BIO": "Biografia",
+      "BIO_PLACEHOLDER": "Conte-nos sobre você...",
+      "LOCATION": "Localização",
+      "LOCATION_PLACEHOLDER": "Cidade, Estado",
+      "CATEGORIES": "Categorias de Serviço",
+      "SAVE": "Salvar Alterações",
+      "SAVING": "Salvando...",
+      "SUCCESS": "Perfil atualizado com sucesso!",
+      "ERROR": "Erro ao atualizar perfil."
+    },
+    "PORTFOLIO": {
+      "TITLE": "Portfólio",
+      "ADD_NEW": "Adicionar Novo Item",
+      "ITEM_TITLE": "Título",
+      "ITEM_TITLE_PLACEHOLDER": "Ex: Desenvolvimento de Landing Page",
+      "ITEM_DESC": "Descrição",
+      "ITEM_DESC_PLACEHOLDER": "Descreva o projeto...",
+      "ITEM_IMAGE": "URL da Imagem",
+      "ADD": "Adicionar Item",
+      "ADDING": "Adicionando...",
+      "ITEMS": "Seus Itens de Portfólio"
+    },
+    "REQUESTS": {
+      "TITLE": "Solicitações de Serviço",
+      "SENT_BY": "Enviado por",
+      "REJECT": "Recusar",
+      "ACCEPT": "Aceitar",
+      "ACCEPTED": "Solicitação Aceita",
+      "REJECTED": "Solicitação Recusada",
+      "NO_REQUESTS": "Nenhuma solicitação pendente",
+      "NO_REQUESTS_DESC": "Você não possui nenhuma solicitação de serviço no momento."
     }
   },
   "PROFILE": {
@@ -168,6 +190,13 @@
     "NO_REVIEWS": "Nenhuma avaliação ainda.",
     "LEAVE_REVIEW": "Deixar uma avaliação",
     "RATING": "Sua Avaliação",
+    "RATING_STARS": {
+      "5": "5 Estrelas",
+      "4": "4 Estrelas",
+      "3": "3 Estrelas",
+      "2": "2 Estrelas",
+      "1": "1 Estrela"
+    },
     "COMMENT": "Seu Comentário",
     "SUBMIT_REVIEW": "Enviar Avaliação",
     "SUBMITTING": "Enviando...",
